@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 12) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 13) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 12 components (Vue-native)
-Phase 12 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar + data-display primitives without React dependencies:
+## Phase 13 components (Vue-native)
+Phase 13 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar + data-display + leaderboard primitives without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -77,6 +77,14 @@ Phase 12 includes foundational + form + utility + identity/navigation + typograp
 - `ToolbarSeparator.vue`
 - `BarList.vue`
 - `Tracker.vue`
+- `Leaderboard.vue`
+- `LeaderboardHeader.vue`
+- `LeaderboardTitle.vue`
+- `LeaderboardAction.vue`
+- `LeaderboardContent.vue`
+- `LeaderboardItem.vue`
+- `LeaderboardStart.vue`
+- `LeaderboardEnd.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -138,6 +146,14 @@ import ToolbarItem from '@/components/ui/ToolbarItem.vue'
 import ToolbarSeparator from '@/components/ui/ToolbarSeparator.vue'
 import BarList from '@/components/ui/BarList.vue'
 import Tracker from '@/components/ui/Tracker.vue'
+import Leaderboard from '@/components/ui/Leaderboard.vue'
+import LeaderboardHeader from '@/components/ui/LeaderboardHeader.vue'
+import LeaderboardTitle from '@/components/ui/LeaderboardTitle.vue'
+import LeaderboardAction from '@/components/ui/LeaderboardAction.vue'
+import LeaderboardContent from '@/components/ui/LeaderboardContent.vue'
+import LeaderboardItem from '@/components/ui/LeaderboardItem.vue'
+import LeaderboardStart from '@/components/ui/LeaderboardStart.vue'
+import LeaderboardEnd from '@/components/ui/LeaderboardEnd.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -160,7 +176,7 @@ const trackerData = [
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 12 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 13 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -280,6 +296,22 @@ const trackerData = [
       <div class="mt-4">
         <Tracker :data="trackerData" />
       </div>
+      <div class="mt-4">
+        <Leaderboard>
+          <LeaderboardHeader>
+            <LeaderboardTitle>Plan score</LeaderboardTitle>
+            <LeaderboardAction>Updated today</LeaderboardAction>
+          </LeaderboardHeader>
+          <LeaderboardContent>
+            <LeaderboardItem :value="78">
+              <template #default="{ value }">
+                <LeaderboardStart>Pro</LeaderboardStart>
+                <LeaderboardEnd>{{ value }}</LeaderboardEnd>
+              </template>
+            </LeaderboardItem>
+          </LeaderboardContent>
+        </Leaderboard>
+      </div>
     </CardContent>
     <CardFooter>
       <Button intent="primary">Continue</Button>
@@ -290,8 +322,13 @@ const trackerData = [
 ```
 
 ## Notes
-- These Phase 12 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 13 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
+
+## Migration progress
+- React UI files tracked: **87**
+- Vue-native file-level parity (kebab-case mapping): **31**
+- Remaining React UI files not yet migrated: **56**
 
 ## Other frameworks
 You might be interested in using Intent with other frameworks.
