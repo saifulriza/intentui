@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 1) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 2) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,45 +22,76 @@ export default defineConfig({
 })
 ```
 
-## Phase 1 components (Vue-native)
-Phase 1 includes foundational components without React dependencies:
+## Phase 2 components (Vue-native)
+Phase 2 includes foundational + form components without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
 - `CardHeader.vue`
 - `CardContent.vue`
 - `CardFooter.vue`
+- `Input.vue`
+- `InputGroup.vue`
+- `Checkbox.vue`
+- `CheckboxGroup.vue`
+- `Radio.vue`
+- `RadioGroup.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
 
 ## Use in Vue
-Use the components directly in `.vue` files:
+Use the components directly in `.vue` files with `v-model`:
 ```vue
 <script setup lang="ts">
+import { ref } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import Badge from '@/components/ui/Badge.vue'
 import Card from '@/components/ui/Card.vue'
 import CardHeader from '@/components/ui/CardHeader.vue'
 import CardContent from '@/components/ui/CardContent.vue'
 import CardFooter from '@/components/ui/CardFooter.vue'
+import Input from '@/components/ui/Input.vue'
+import Checkbox from '@/components/ui/Checkbox.vue'
+import CheckboxGroup from '@/components/ui/CheckboxGroup.vue'
+import Radio from '@/components/ui/Radio.vue'
+import RadioGroup from '@/components/ui/RadioGroup.vue'
+
+const name = ref('')
+const channels = ref<Array<string | number>>(['email'])
+const plan = ref('starter')
 </script>
 
 <template>
   <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 1 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 2 components" />
     <CardContent>
-      <Badge intent="success">Ready</Badge>
+      <Input v-model="name" placeholder="Your name" />
+      <div class="mt-4 space-y-3">
+        <CheckboxGroup v-model="channels">
+          <Checkbox value="email" label="Email" />
+          <Checkbox value="sms" label="SMS" />
+        </CheckboxGroup>
+      </div>
+      <div class="mt-4 space-y-3">
+        <RadioGroup v-model="plan">
+          <Radio value="starter" label="Starter" />
+          <Radio value="pro" label="Pro" />
+        </RadioGroup>
+      </div>
+      <div class="mt-4">
+        <Badge intent="success">Selected plan: {{ plan }}</Badge>
+      </div>
     </CardContent>
     <CardFooter>
-      <Button intent="primary">Button from Intent UI</Button>
+      <Button intent="primary">Continue</Button>
     </CardFooter>
   </Card>
 </template>
 ```
 
 ## Notes
-- These Phase 1 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 2 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
