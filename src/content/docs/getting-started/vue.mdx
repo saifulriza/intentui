@@ -1,0 +1,55 @@
+---
+title: "Vue 3"
+description: Use Intent UI in Vue 3 by bridging React components into Vue with Veaury.
+---
+
+## Installation
+Create a Vue project with Vite:
+<InstallCommand command="npm create vite@latest"/>
+
+Install the required dependencies for Vue + React interoperability:
+<InstallCommand command="npm install vue react react-dom veaury tailwindcss @tailwindcss/vite"/>
+
+## Configure Vite
+Update your `vite.config.ts` so Vue and React can run in the same app:
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { veauryVitePlugins } from 'veaury/vite/index.js'
+
+export default defineConfig({
+  plugins: [vue(), react(), tailwindcss(), ...veauryVitePlugins()],
+})
+```
+
+## Install Intent UI
+Initialize Intent UI in your project:
+<InstallCommand command="npx shadcn@latest init @intentui/theme-default"/>
+
+Add components:
+<InstallCommand command="npx shadcn@latest add @intentui/button @intentui/text-field"/>
+
+## Use in Vue
+Wrap your generated React component and render it in Vue:
+```vue
+<script setup lang="ts">
+import { applyReactInVue } from 'veaury'
+import { Button } from '@/components/ui/button'
+
+const UIButton = applyReactInVue(Button)
+</script>
+
+<template>
+  <UIButton>Button from Intent UI</UIButton>
+</template>
+```
+
+## Notes
+- Intent components remain React components under the hood.
+- For routing behavior, pass a `navigate` function to your React app `Providers` (already framework-agnostic in this repo).
+
+## Other framework
+You might be interested in using Intent with other frameworks.
+<FrameworkGuides/>

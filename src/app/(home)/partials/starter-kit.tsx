@@ -1,7 +1,7 @@
 "use client"
 
 import { twMerge } from "tailwind-merge"
-import { IconBrandTanstack, IconBrandVite } from "@/components/framework-guides"
+import { IconBrandTanstack, IconBrandVite, IconBrandVue } from "@/components/framework-guides"
 import { BrandLaravelIcon } from "@/components/icons/brand-laravel-icon"
 import { BrandNextjsIcon } from "@/components/icons/brand-nextjs-icon"
 import { PageContainer } from "@/components/page-container"
@@ -31,6 +31,12 @@ export const starterKits = [
     name: "Tanstack Router",
     url: `/docs/getting-started/tanstack-router`,
     description: "Opinionated setup with routing, layouts, and auth, ready for modern apps.",
+  },
+  {
+    icon: IconBrandVue,
+    name: "Vue 3",
+    url: `/docs/getting-started/vue`,
+    description: "Use Intent UI components in Vue 3 via a React bridge setup.",
   },
   {
     icon: IconBrandVite,
