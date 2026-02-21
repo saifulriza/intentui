@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed, ref, watch } from "vue"
 
 const props = withDefaults(
   defineProps<{
@@ -53,6 +53,15 @@ const classes = computed(() =>
     props.isSquare ? "rounded-(--avatar-radius) *:rounded-(--avatar-radius)" : "rounded-full *:rounded-full",
   ].join(" "),
 )
+
+const isImageError = ref(false)
+
+watch(
+  () => props.src,
+  () => {
+    isImageError.value = false
+  },
+)
 </script>
 
 <template>
@@ -75,6 +84,12 @@ const classes = computed(() =>
         {{ initials }}
       </text>
     </svg>
-    <img v-if="src" class="size-full object-cover object-center" :src="src" :alt="alt" />
+    <img
+      v-if="src && !isImageError"
+      class="size-full object-cover object-center"
+      :src="src"
+      :alt="alt"
+      @error="isImageError = true"
+    />
   </span>
 </template>

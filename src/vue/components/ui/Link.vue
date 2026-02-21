@@ -16,7 +16,7 @@ defineProps<{
     :tabindex="ariaDisabled ? -1 : undefined"
     class="font-medium text-(--text) outline-0 outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring forced-colors:outline-[Highlight] disabled:cursor-default disabled:opacity-50 forced-colors:disabled:text-[GrayText]"
     :class="href ? 'cursor-pointer' : ''"
-    @click="ariaDisabled ? $event.preventDefault() : undefined"
+    @click="ariaDisabled && $event.preventDefault()"
   >
     <slot />
   </a>
