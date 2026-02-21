@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 5) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 6) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 5 components (Vue-native)
-Phase 5 includes foundational + form + utility + identity/navigation + typography/layout components without React dependencies:
+## Phase 6 components (Vue-native)
+Phase 6 includes foundational + form + utility + identity/navigation + typography/layout + structure components without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -50,6 +50,12 @@ Phase 5 includes foundational + form + utility + identity/navigation + typograph
 - `Heading.vue`
 - `Container.vue`
 - `Note.vue`
+- `Skeleton.vue`
+- `ButtonGroup.vue`
+- `ButtonGroupText.vue`
+- `DescriptionList.vue`
+- `DescriptionTerm.vue`
+- `DescriptionDetails.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -84,6 +90,12 @@ import Code from '@/components/ui/Code.vue'
 import Heading from '@/components/ui/Heading.vue'
 import Container from '@/components/ui/Container.vue'
 import Note from '@/components/ui/Note.vue'
+import Skeleton from '@/components/ui/Skeleton.vue'
+import ButtonGroup from '@/components/ui/ButtonGroup.vue'
+import ButtonGroupText from '@/components/ui/ButtonGroupText.vue'
+import DescriptionList from '@/components/ui/DescriptionList.vue'
+import DescriptionTerm from '@/components/ui/DescriptionTerm.vue'
+import DescriptionDetails from '@/components/ui/DescriptionDetails.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -93,7 +105,7 @@ const plan = ref('starter')
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 5 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 6 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -128,6 +140,15 @@ const plan = ref('starter')
         <Switch :model-value="true" label="Notifications" />
       </div>
       <div class="mt-4">
+        <ButtonGroup>
+          <Button intent="outline">Back</Button>
+          <Button intent="primary">Save</Button>
+        </ButtonGroup>
+      </div>
+      <div class="mt-3">
+        <ButtonGroupText>2 actions selected</ButtonGroupText>
+      </div>
+      <div class="mt-4">
         <Note intent="info">Try <Code>&lt;TextLink /&gt;</Code> for inline links in copy.</Note>
       </div>
       <div class="mt-2">
@@ -137,6 +158,15 @@ const plan = ref('starter')
       </div>
       <div class="mt-4">
         <Separator />
+      </div>
+      <div class="mt-4">
+        <DescriptionList>
+          <DescriptionTerm>Plan</DescriptionTerm>
+          <DescriptionDetails>{{ plan }}</DescriptionDetails>
+        </DescriptionList>
+      </div>
+      <div class="mt-4">
+        <Skeleton class="h-6 w-full" />
       </div>
     </CardContent>
     <CardFooter>
@@ -148,7 +178,7 @@ const plan = ref('starter')
 ```
 
 ## Notes
-- These Phase 5 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 6 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
