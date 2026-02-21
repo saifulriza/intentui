@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 8) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 9) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 8 components (Vue-native)
-Phase 8 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle components without React dependencies:
+## Phase 9 components (Vue-native)
+Phase 9 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field primitives without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -62,6 +62,13 @@ Phase 8 includes foundational + form + utility + identity/navigation + typograph
 - `Toggle.vue`
 - `ToggleGroup.vue`
 - `ToggleGroupItem.vue`
+- `TextField.vue`
+- `Label.vue`
+- `Description.vue`
+- `Fieldset.vue`
+- `FieldGroup.vue`
+- `FieldError.vue`
+- `Legend.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -108,6 +115,13 @@ import Meter from '@/components/ui/Meter.vue'
 import Toggle from '@/components/ui/Toggle.vue'
 import ToggleGroup from '@/components/ui/ToggleGroup.vue'
 import ToggleGroupItem from '@/components/ui/ToggleGroupItem.vue'
+import TextField from '@/components/ui/TextField.vue'
+import Label from '@/components/ui/Label.vue'
+import Description from '@/components/ui/Description.vue'
+import Fieldset from '@/components/ui/Fieldset.vue'
+import FieldGroup from '@/components/ui/FieldGroup.vue'
+import FieldError from '@/components/ui/FieldError.vue'
+import Legend from '@/components/ui/Legend.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -119,7 +133,7 @@ const formatting = ref('bold')
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 8 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 9 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -198,6 +212,22 @@ const formatting = ref('bold')
           <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
         </ToggleGroup>
       </div>
+      <div class="mt-4">
+        <TextField>
+          <Label>Display Name</Label>
+          <Input v-model="name" placeholder="Type your display name" />
+          <Description>This name appears on your profile.</Description>
+          <FieldError v-if="name.length === 0">Display name is required.</FieldError>
+        </TextField>
+      </div>
+      <div class="mt-4">
+        <Fieldset>
+          <Legend>Preferences</Legend>
+          <FieldGroup>
+            <Switch :model-value="true" label="Email updates" />
+          </FieldGroup>
+        </Fieldset>
+      </div>
     </CardContent>
     <CardFooter>
       <Button intent="primary">Continue</Button>
@@ -208,7 +238,7 @@ const formatting = ref('bold')
 ```
 
 ## Notes
-- These Phase 8 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 9 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
