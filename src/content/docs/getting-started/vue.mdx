@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 2) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 3) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 2 components (Vue-native)
-Phase 2 includes foundational + form components without React dependencies:
+## Phase 3 components (Vue-native)
+Phase 3 includes foundational + form + utility components without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -36,6 +36,10 @@ Phase 2 includes foundational + form components without React dependencies:
 - `CheckboxGroup.vue`
 - `Radio.vue`
 - `RadioGroup.vue`
+- `Textarea.vue`
+- `Separator.vue`
+- `Keyboard.vue`
+- `Loader.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -56,6 +60,10 @@ import Checkbox from '@/components/ui/Checkbox.vue'
 import CheckboxGroup from '@/components/ui/CheckboxGroup.vue'
 import Radio from '@/components/ui/Radio.vue'
 import RadioGroup from '@/components/ui/RadioGroup.vue'
+import Textarea from '@/components/ui/Textarea.vue'
+import Separator from '@/components/ui/Separator.vue'
+import Loader from '@/components/ui/Loader.vue'
+import Keyboard from '@/components/ui/Keyboard.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -64,9 +72,12 @@ const plan = ref('starter')
 
 <template>
   <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 2 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 3 components" />
     <CardContent>
       <Input v-model="name" placeholder="Your name" />
+      <div class="mt-4">
+        <Textarea v-model="name" placeholder="Short bio" />
+      </div>
       <div class="mt-4 space-y-3">
         <CheckboxGroup v-model="channels">
           <Checkbox value="email" label="Email" />
@@ -82,6 +93,13 @@ const plan = ref('starter')
       <div class="mt-4">
         <Badge intent="success">Selected plan: {{ plan }}</Badge>
       </div>
+      <div class="mt-4 flex items-center gap-2">
+        <Keyboard>⌘K</Keyboard>
+        <Loader />
+      </div>
+      <div class="mt-4">
+        <Separator />
+      </div>
     </CardContent>
     <CardFooter>
       <Button intent="primary">Continue</Button>
@@ -91,7 +109,7 @@ const plan = ref('starter')
 ```
 
 ## Notes
-- These Phase 2 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 3 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
