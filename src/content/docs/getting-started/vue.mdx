@@ -365,12 +365,22 @@ const trackerData = [
 
 ## Notes
 - These Phase 18 components are Vue-native and do not depend on React, React DOM, or Veaury.
-- More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
+- Run `npm run audit:vue-parity` to re-check file-level coverage and detect likely behavior/style/props gaps.
 
 ## Migration progress
 - React UI files tracked: **87**
 - Vue-native file-level parity (kebab-case mapping): **87**
 - Remaining React UI files not yet migrated: **0**
+
+## Gap audit (behavior/style/props)
+- Current audit threshold: Vue files with less than **35%** of their React counterpart line count.
+- Potential high-gap components: **15**
+- Highest-priority candidates:
+  - `leaderboard` → `Leaderboard` (ratio `0.04`)
+  - `card` → `Card` (ratio `0.09`)
+  - `sidebar` → `Sidebar` (ratio `0.10`)
+  - `description-list` → `DescriptionList` (ratio `0.13`)
+  - `field` → `Field` (ratio `0.14`)
 
 ## Critical interactive batch status
 - Migrated from stubs to functional Vue implementations:
