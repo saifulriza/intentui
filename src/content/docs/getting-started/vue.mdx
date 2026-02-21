@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 7) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 8) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 7 components (Vue-native)
-Phase 7 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress components without React dependencies:
+## Phase 8 components (Vue-native)
+Phase 8 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle components without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -59,6 +59,9 @@ Phase 7 includes foundational + form + utility + identity/navigation + typograph
 - `ProgressBar.vue`
 - `ProgressCircle.vue`
 - `Meter.vue`
+- `Toggle.vue`
+- `ToggleGroup.vue`
+- `ToggleGroupItem.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -102,16 +105,21 @@ import DescriptionDetails from '@/components/ui/DescriptionDetails.vue'
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import ProgressCircle from '@/components/ui/ProgressCircle.vue'
 import Meter from '@/components/ui/Meter.vue'
+import Toggle from '@/components/ui/Toggle.vue'
+import ToggleGroup from '@/components/ui/ToggleGroup.vue'
+import ToggleGroupItem from '@/components/ui/ToggleGroupItem.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
 const plan = ref('starter')
+const isOn = ref(true)
+const formatting = ref('bold')
 </script>
 
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 7 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 8 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -181,6 +189,15 @@ const plan = ref('starter')
           <Meter :model-value="65" />
         </div>
       </div>
+      <div class="mt-4">
+        <Toggle v-model="isOn">Standalone Toggle</Toggle>
+      </div>
+      <div class="mt-4">
+        <ToggleGroup v-model="formatting" selection-mode="single">
+          <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
+          <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
+        </ToggleGroup>
+      </div>
     </CardContent>
     <CardFooter>
       <Button intent="primary">Continue</Button>
@@ -191,7 +208,7 @@ const plan = ref('starter')
 ```
 
 ## Notes
-- These Phase 7 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 8 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
