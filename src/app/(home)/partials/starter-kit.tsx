@@ -36,7 +36,7 @@ export const starterKits = [
     icon: IconBrandVue,
     name: "Vue 3",
     url: `/docs/getting-started/vue`,
-    description: "Start with Vue-native Intent UI Phase 11 components (no React bridge).",
+    description: "Start with Vue-native Intent UI Phase 12 components (no React bridge).",
   },
   {
     icon: IconBrandVite,

@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 11) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 12) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 11 components (Vue-native)
-Phase 11 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar primitives without React dependencies:
+## Phase 12 components (Vue-native)
+Phase 12 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar + data-display primitives without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -75,6 +75,8 @@ Phase 11 includes foundational + form + utility + identity/navigation + typograp
 - `ToolbarGroup.vue`
 - `ToolbarItem.vue`
 - `ToolbarSeparator.vue`
+- `BarList.vue`
+- `Tracker.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -134,18 +136,31 @@ import Toolbar from '@/components/ui/Toolbar.vue'
 import ToolbarGroup from '@/components/ui/ToolbarGroup.vue'
 import ToolbarItem from '@/components/ui/ToolbarItem.vue'
 import ToolbarSeparator from '@/components/ui/ToolbarSeparator.vue'
+import BarList from '@/components/ui/BarList.vue'
+import Tracker from '@/components/ui/Tracker.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
 const plan = ref('starter')
 const isOn = ref(true)
 const formatting = ref('bold')
+const ranking = [
+  { name: 'Starter', value: 52 },
+  { name: 'Pro', value: 78 },
+  { name: 'Enterprise', value: 33 },
+]
+const trackerData = [
+  { key: 'd1', color: 'bg-success', tooltip: 'High activity' },
+  { key: 'd2', color: 'bg-warning', tooltip: 'Medium activity' },
+  { key: 'd3', color: 'bg-danger', tooltip: 'Low activity' },
+  { key: 'd4', tooltip: 'No data' },
+]
 </script>
 
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 11 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 12 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -259,6 +274,12 @@ const formatting = ref('bold')
           </ToolbarGroup>
         </Toolbar>
       </div>
+      <div class="mt-4">
+        <BarList :data="ranking" />
+      </div>
+      <div class="mt-4">
+        <Tracker :data="trackerData" />
+      </div>
     </CardContent>
     <CardFooter>
       <Button intent="primary">Continue</Button>
@@ -269,7 +290,7 @@ const formatting = ref('bold')
 ```
 
 ## Notes
-- These Phase 11 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 12 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
