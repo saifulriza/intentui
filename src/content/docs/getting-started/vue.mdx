@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 3) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 4) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 3 components (Vue-native)
-Phase 3 includes foundational + form + utility components without React dependencies:
+## Phase 4 components (Vue-native)
+Phase 4 includes foundational + form + utility + identity/navigation components without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -40,6 +40,9 @@ Phase 3 includes foundational + form + utility components without React dependen
 - `Separator.vue`
 - `Keyboard.vue`
 - `Loader.vue`
+- `Avatar.vue`
+- `Link.vue`
+- `Switch.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -64,6 +67,9 @@ import Textarea from '@/components/ui/Textarea.vue'
 import Separator from '@/components/ui/Separator.vue'
 import Loader from '@/components/ui/Loader.vue'
 import Keyboard from '@/components/ui/Keyboard.vue'
+import Avatar from '@/components/ui/Avatar.vue'
+import Link from '@/components/ui/Link.vue'
+import Switch from '@/components/ui/Switch.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -72,7 +78,7 @@ const plan = ref('starter')
 
 <template>
   <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 3 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 4 components" />
     <CardContent>
       <Input v-model="name" placeholder="Your name" />
       <div class="mt-4">
@@ -97,6 +103,13 @@ const plan = ref('starter')
         <Keyboard>⌘K</Keyboard>
         <Loader />
       </div>
+      <div class="mt-4 flex items-center gap-3">
+        <Avatar initials="IN" alt="Intent UI" />
+        <Link href="https://intentui.com" target="_blank" rel="noreferrer">Visit docs</Link>
+      </div>
+      <div class="mt-4">
+        <Switch :model-value="true" label="Notifications" />
+      </div>
       <div class="mt-4">
         <Separator />
       </div>
@@ -109,7 +122,7 @@ const plan = ref('starter')
 ```
 
 ## Notes
-- These Phase 3 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 4 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks
