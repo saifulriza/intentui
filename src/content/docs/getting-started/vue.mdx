@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 17) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 18) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,12 +22,15 @@ export default defineConfig({
 })
 ```
 
-## Phase 17 components (Vue-native)
-Phase 17 continues functional parity work after file-level parity between `src/components/ui` and `src/vue/components/ui`, including richer chart container behavior (`config`, `data`, legend selection).
+## Phase 18 components (Vue-native)
+Phase 18 continues functional parity work after file-level parity between `src/components/ui` and `src/vue/components/ui`, including richer chart container behavior (`config`, `data`, legend selection) and card compound slots parity.
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
 - `CardHeader.vue`
+- `CardTitle.vue`
+- `CardDescription.vue`
+- `CardAction.vue`
 - `CardContent.vue`
 - `CardFooter.vue`
 - `Input.vue`
@@ -201,7 +204,7 @@ const trackerData = [
 <template>
   <Container constrained>
     <Card>
-        <CardHeader title="Vue 3 Native" description="Phase 17 components" />
+        <CardHeader title="Vue 3 Native" description="Phase 18 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -361,7 +364,7 @@ const trackerData = [
 ```
 
 ## Notes
-- These Phase 16 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 18 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Migration progress
