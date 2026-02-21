@@ -25,6 +25,7 @@ export const IconBrandVite = (props: React.ComponentProps<"svg">) => (
   <svg
     className="size-5"
     data-slot="icon"
+    aria-hidden="true"
     {...props}
     viewBox="0 0 40 40"
     fill="none"
@@ -70,6 +71,7 @@ export const IconBrandVue = (props: React.ComponentProps<"svg">) => (
   <svg
     className="size-5"
     data-slot="icon"
+    aria-hidden="true"
     {...props}
     viewBox="0 0 261.76 226.69"
     fill="currentColor"
