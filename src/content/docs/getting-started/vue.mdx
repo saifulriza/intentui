@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 14) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 15) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 14 components (Vue-native)
-Phase 14 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar + data-display + leaderboard + file interaction primitives without React dependencies:
+## Phase 15 components (Vue-native)
+Phase 15 completes file-level parity between `src/components/ui` and `src/vue/components/ui` (all component filenames now available in Vue).
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -182,7 +182,7 @@ const trackerData = [
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 14 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 15 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -342,13 +342,13 @@ const trackerData = [
 ```
 
 ## Notes
-- These Phase 14 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 15 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Migration progress
 - React UI files tracked: **87**
-- Vue-native file-level parity (kebab-case mapping): **34**
-- Remaining React UI files not yet migrated: **53**
+- Vue-native file-level parity (kebab-case mapping): **87**
+- Remaining React UI files not yet migrated: **0**
 
 ## Other frameworks
 You might be interested in using Intent with other frameworks.
