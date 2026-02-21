@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 4) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 5) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 4 components (Vue-native)
-Phase 4 includes foundational + form + utility + identity/navigation components without React dependencies:
+## Phase 5 components (Vue-native)
+Phase 5 includes foundational + form + utility + identity/navigation + typography/layout components without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -43,6 +43,13 @@ Phase 4 includes foundational + form + utility + identity/navigation components 
 - `Avatar.vue`
 - `Link.vue`
 - `Switch.vue`
+- `Text.vue`
+- `TextLink.vue`
+- `Strong.vue`
+- `Code.vue`
+- `Heading.vue`
+- `Container.vue`
+- `Note.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -70,6 +77,13 @@ import Keyboard from '@/components/ui/Keyboard.vue'
 import Avatar from '@/components/ui/Avatar.vue'
 import Link from '@/components/ui/Link.vue'
 import Switch from '@/components/ui/Switch.vue'
+import Text from '@/components/ui/Text.vue'
+import TextLink from '@/components/ui/TextLink.vue'
+import Strong from '@/components/ui/Strong.vue'
+import Code from '@/components/ui/Code.vue'
+import Heading from '@/components/ui/Heading.vue'
+import Container from '@/components/ui/Container.vue'
+import Note from '@/components/ui/Note.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -77,9 +91,12 @@ const plan = ref('starter')
 </script>
 
 <template>
-  <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 4 components" />
+  <Container constrained>
+    <Card>
+    <CardHeader title="Vue 3 Native" description="Phase 5 components" />
     <CardContent>
+      <Heading :level="3">Profile</Heading>
+      <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
       <Input v-model="name" placeholder="Your name" />
       <div class="mt-4">
         <Textarea v-model="name" placeholder="Short bio" />
@@ -111,6 +128,14 @@ const plan = ref('starter')
         <Switch :model-value="true" label="Notifications" />
       </div>
       <div class="mt-4">
+        <Note intent="info">Try <Code>&lt;TextLink /&gt;</Code> for inline links in copy.</Note>
+      </div>
+      <div class="mt-2">
+        <TextLink href="https://intentui.com/docs/getting-started/vue" target="_blank" rel="noreferrer">
+          Open Vue guide
+        </TextLink>
+      </div>
+      <div class="mt-4">
         <Separator />
       </div>
     </CardContent>
@@ -118,11 +143,12 @@ const plan = ref('starter')
       <Button intent="primary">Continue</Button>
     </CardFooter>
   </Card>
+  </Container>
 </template>
 ```
 
 ## Notes
-- These Phase 4 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 5 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Other frameworks

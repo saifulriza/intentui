@@ -103,7 +103,7 @@ const frameworks = [
   },
   {
     name: "Vue 3",
-    description: "Use Vue 3 with Intent through Vue-native Phase 4 components.",
+    description: "Use Vue 3 with Intent through Vue-native Phase 5 components.",
     logo: IconBrandVue,
     href: "/docs/getting-started/vue",
   },
