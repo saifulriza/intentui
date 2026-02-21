@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 15) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 16) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 15 components (Vue-native)
-Phase 15 completes file-level parity between `src/components/ui` and `src/vue/components/ui` (all component filenames now available in Vue).
+## Phase 16 components (Vue-native)
+Phase 16 continues functional parity work after file-level parity between `src/components/ui` and `src/vue/components/ui`.
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -102,6 +102,11 @@ Phase 15 completes file-level parity between `src/components/ui` and `src/vue/co
 - `ColorThumb.vue`
 - `ColorWheel.vue`
 - `ColorPicker.vue`
+- `Chart.vue`
+- `AreaChart.vue`
+- `BarChart.vue`
+- `LineChart.vue`
+- `PieChart.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -196,7 +201,7 @@ const trackerData = [
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 15 components" />
+        <CardHeader title="Vue 3 Native" description="Phase 16 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -356,7 +361,7 @@ const trackerData = [
 ```
 
 ## Notes
-- These Phase 15 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 16 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Migration progress
@@ -400,9 +405,14 @@ const trackerData = [
   - `Pagination.vue`
   - `Navbar.vue`
   - `Sidebar.vue`
-  - `ColorWheel.vue`
-  - `ColorPicker.vue`
-  - `LeaderboardItem.vue` (action/value parity)
+   - `ColorWheel.vue`
+   - `ColorPicker.vue`
+   - `Chart.vue`
+   - `AreaChart.vue`
+   - `BarChart.vue`
+   - `LineChart.vue`
+   - `PieChart.vue`
+   - `LeaderboardItem.vue` (action/value parity)
 
 ## Other frameworks
 You might be interested in using Intent with other frameworks.
