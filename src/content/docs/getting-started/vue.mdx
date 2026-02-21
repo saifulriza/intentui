@@ -323,7 +323,7 @@ const trackerData = [
             <LeaderboardAction>Updated today</LeaderboardAction>
           </LeaderboardHeader>
           <LeaderboardContent>
-            <LeaderboardItem :value="78">
+            <LeaderboardItem :model-value="78">
               <template #default="{ value }">
                 <LeaderboardStart>Pro</LeaderboardStart>
                 <LeaderboardEnd>{{ value }}</LeaderboardEnd>
@@ -402,6 +402,7 @@ const trackerData = [
   - `Sidebar.vue`
   - `ColorWheel.vue`
   - `ColorPicker.vue`
+  - `LeaderboardItem.vue` (action/value parity)
 
 ## Other frameworks
 You might be interested in using Intent with other frameworks.
