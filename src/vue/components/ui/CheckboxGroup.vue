@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { provide, toRef } from "vue"
 
+const defaultModelValue = () => [] as Array<string | number>
+
 const props = withDefaults(
   defineProps<{
     modelValue?: Array<string | number>
     name?: string
   }>(),
   {
-    modelValue: () => [],
+    modelValue: defaultModelValue,
   },
 )
 
@@ -35,7 +37,7 @@ provide("intent-checkbox-group", {
 <template>
   <div
     data-slot="control"
-    class="space-y-3 has-[[slot=description]]:space-y-6 has-[[slot=description]]:**:data-[slot=label]:font-medium **:[[slot=description]]:block"
+    class="space-y-3"
   >
     <slot />
   </div>
