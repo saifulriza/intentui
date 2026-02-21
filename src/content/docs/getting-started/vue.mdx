@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 13) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 14) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 13 components (Vue-native)
-Phase 13 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar + data-display + leaderboard primitives without React dependencies:
+## Phase 14 components (Vue-native)
+Phase 14 includes foundational + form + utility + identity/navigation + typography/layout + structure + progress + toggle + field + breadcrumbs + toolbar + data-display + leaderboard + file interaction primitives without React dependencies:
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -85,6 +85,9 @@ Phase 13 includes foundational + form + utility + identity/navigation + typograp
 - `LeaderboardItem.vue`
 - `LeaderboardStart.vue`
 - `LeaderboardEnd.vue`
+- `DropZone.vue`
+- `FileTrigger.vue`
+- `Field.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -154,6 +157,9 @@ import LeaderboardContent from '@/components/ui/LeaderboardContent.vue'
 import LeaderboardItem from '@/components/ui/LeaderboardItem.vue'
 import LeaderboardStart from '@/components/ui/LeaderboardStart.vue'
 import LeaderboardEnd from '@/components/ui/LeaderboardEnd.vue'
+import DropZone from '@/components/ui/DropZone.vue'
+import FileTrigger from '@/components/ui/FileTrigger.vue'
+import Field from '@/components/ui/Field.vue'
 
 const name = ref('')
 const channels = ref<string[]>(['email'])
@@ -176,7 +182,7 @@ const trackerData = [
 <template>
   <Container constrained>
     <Card>
-    <CardHeader title="Vue 3 Native" description="Phase 13 components" />
+    <CardHeader title="Vue 3 Native" description="Phase 14 components" />
     <CardContent>
       <Heading :level="3">Profile</Heading>
       <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
@@ -312,6 +318,20 @@ const trackerData = [
           </LeaderboardContent>
         </Leaderboard>
       </div>
+      <div class="mt-4">
+        <DropZone @files-drop="(files) => console.log(files)">
+          Drop files here
+        </DropZone>
+      </div>
+      <div class="mt-4">
+        <FileTrigger @change="(files) => console.log(files)">Upload file</FileTrigger>
+      </div>
+      <div class="mt-4">
+        <Field>
+          <Label>Company</Label>
+          <Input placeholder="Intent UI" />
+        </Field>
+      </div>
     </CardContent>
     <CardFooter>
       <Button intent="primary">Continue</Button>
@@ -322,13 +342,13 @@ const trackerData = [
 ```
 
 ## Notes
-- These Phase 13 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 14 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - More interactive components (menu/dialog/select/date, etc.) will follow in next phases.
 
 ## Migration progress
 - React UI files tracked: **87**
-- Vue-native file-level parity (kebab-case mapping): **31**
-- Remaining React UI files not yet migrated: **56**
+- Vue-native file-level parity (kebab-case mapping): **34**
+- Remaining React UI files not yet migrated: **53**
 
 ## Other frameworks
 You might be interested in using Intent with other frameworks.
