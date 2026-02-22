@@ -1,6 +1,6 @@
 ---
 title: "Vue 3"
-description: Use Intent UI in Vue 3 with native Vue components (Phase 18) without React bridge dependencies.
+description: Use Intent UI in Vue 3 with native Vue components (Phase 19) without React bridge dependencies.
 ---
 
 ## Installation
@@ -22,8 +22,8 @@ export default defineConfig({
 })
 ```
 
-## Phase 18 components (Vue-native)
-Phase 18 continues functional parity work after file-level parity between `src/components/ui` and `src/vue/components/ui`, including richer chart container behavior (`config`, `data`, legend selection) and card compound slots parity.
+## Phase 19 components (Vue-native)
+Phase 19 continues functional parity work after file-level parity between `src/components/ui` and `src/vue/components/ui`, including richer chart container behavior (`config`, `data`, legend selection), card compound slots parity, and new sidebar/navbar/drawer/table compound Vue APIs.
 - `Button.vue`
 - `Badge.vue`
 - `Card.vue`
@@ -94,6 +94,11 @@ Phase 18 continues functional parity work after file-level parity between `src/c
 - `Carousel.vue`
 - `ScrollArea.vue`
 - `Table.vue`
+- `TableHeader.vue`
+- `TableBody.vue`
+- `TableRow.vue`
+- `TableColumn.vue`
+- `TableCell.vue`
 - `Toast.vue`
 - `Snippet.vue`
 - `ShowMore.vue`
@@ -110,6 +115,19 @@ Phase 18 continues functional parity work after file-level parity between `src/c
 - `BarChart.vue`
 - `LineChart.vue`
 - `PieChart.vue`
+- `NavbarSection.vue`
+- `NavbarItem.vue`
+- `NavbarTrigger.vue`
+- `SidebarHeader.vue`
+- `SidebarContent.vue`
+- `SidebarFooter.vue`
+- `SidebarItem.vue`
+- `SidebarTrigger.vue`
+- `DrawerHeader.vue`
+- `DrawerTitle.vue`
+- `DrawerDescription.vue`
+- `DrawerBody.vue`
+- `DrawerFooter.vue`
 
 You can copy these from:
 `/src/vue/components/ui`
@@ -364,7 +382,7 @@ const trackerData = [
 ```
 
 ## Notes
-- These Phase 18 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- These Phase 19 components are Vue-native and do not depend on React, React DOM, or Veaury.
 - Run `npm run audit:vue-parity` to re-check file-level coverage and detect likely behavior/style/props gaps.
 
 ## Migration progress
@@ -374,13 +392,13 @@ const trackerData = [
 
 ## Gap audit (behavior/style/props)
 - Current audit threshold: Vue files with less than **35%** of their React counterpart line count.
-- Potential high-gap components: **15**
+- Potential high-gap components: **7**
 - Highest-priority candidates:
-  - `leaderboard` → `Leaderboard` (ratio `0.04`)
-  - `card` → `Card` (ratio `0.09`)
-  - `sidebar` → `Sidebar` (ratio `0.10`)
-  - `description-list` → `DescriptionList` (ratio `0.13`)
-  - `field` → `Field` (ratio `0.14`)
+  - `text` → `Text` (ratio `0.15`)
+  - `sidebar` → `Sidebar` (ratio `0.18`)
+  - `toolbar` → `Toolbar` (ratio `0.30`)
+  - `breadcrumbs` → `Breadcrumbs` (ratio `0.30`)
+  - `toggle-group` → `ToggleGroup` (ratio `0.31`)
 
 ## Critical interactive batch status
 - Migrated from stubs to functional Vue implementations:

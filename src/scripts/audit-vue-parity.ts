@@ -26,17 +26,75 @@ const listFiles = (directory: string, extension: string) =>
 const reactFiles = listFiles(reactDir, ".tsx")
 const vueFiles = listFiles(vueDir, ".vue")
 type FileInfo = (typeof reactFiles)[number]
-type MappedEntry = { reactFile: FileInfo; vueFile: FileInfo; ratio: number }
+type MappedEntry = { reactFile: FileInfo; vueFile: FileInfo; ratio: number; aggregateVueLines: number }
 
 const vueByNormalizedName = new Map(vueFiles.map((file) => [normalizeName(file.name), file]))
+const FAMILY_COMPONENTS: Record<string, string[]> = {
+  leaderboard: [
+    "leaderboard",
+    "leaderboardheader",
+    "leaderboardtitle",
+    "leaderboardaction",
+    "leaderboardcontent",
+    "leaderboarditem",
+    "leaderboardstart",
+    "leaderboardend",
+  ],
+  card: [
+    "card",
+    "cardheader",
+    "cardtitle",
+    "carddescription",
+    "cardaction",
+    "cardcontent",
+    "cardfooter",
+  ],
+  descriptionlist: ["descriptionlist", "descriptionterm", "descriptiondetails"],
+  field: ["field", "label", "description", "fieldset", "fieldgroup", "fielderror", "legend"],
+  chart: ["chart", "areachart", "barchart", "linechart", "piechart"],
+  navbar: ["navbar", "navbarsection", "navbaritem", "navbartrigger"],
+  sidebar: [
+    "sidebar",
+    "sidebarheader",
+    "sidebarcontent",
+    "sidebarfooter",
+    "sidebaritem",
+    "sidebartrigger",
+  ],
+  drawer: [
+    "drawer",
+    "drawerheader",
+    "drawertitle",
+    "drawerdescription",
+    "drawerbody",
+    "drawerfooter",
+  ],
+  table: ["table", "tableheader", "tablebody", "tablerow", "tablecolumn", "tablecell"],
+}
+
+const getVueAggregate = (reactName: string) => {
+  const normalizedName = normalizeName(reactName)
+  const family = FAMILY_COMPONENTS[normalizedName] ?? [normalizedName]
+  const familyFiles = family
+    .map((name) => vueByNormalizedName.get(name))
+    .filter((file): file is FileInfo => Boolean(file))
+
+  if (familyFiles.length === 0) return null
+  const primary = vueByNormalizedName.get(normalizedName) ?? familyFiles[0]
+  return {
+    vueFile: primary,
+    lines: familyFiles.reduce((total, file) => total + file.lines, 0),
+  }
+}
 
 const reactVuePairs = reactFiles.reduce<Array<MappedEntry>>((accumulator, reactFile) => {
-    const vueFile = vueByNormalizedName.get(normalizeName(reactFile.name))
-    if (!vueFile) return accumulator
+    const vueAggregate = getVueAggregate(reactFile.name)
+    if (!vueAggregate) return accumulator
     accumulator.push({
       reactFile,
-      vueFile,
-      ratio: vueFile.lines / reactFile.lines,
+      vueFile: vueAggregate.vueFile,
+      aggregateVueLines: vueAggregate.lines,
+      ratio: vueAggregate.lines / reactFile.lines,
     })
     return accumulator
   }, [])
@@ -58,6 +116,6 @@ if (missing.length > 0) {
 console.log(`\nPotential behavior/style/props gap candidates (ratio < ${GAP_THRESHOLD}): ${potentialGaps.length}`)
 for (const entry of potentialGaps.slice(0, MAX_DISPLAYED_GAPS)) {
   console.log(
-    `- ${entry.reactFile.name} -> ${entry.vueFile.name} | react:${entry.reactFile.lines} vue:${entry.vueFile.lines} ratio:${entry.ratio.toFixed(2)}`,
+    `- ${entry.reactFile.name} -> ${entry.vueFile.name} | react:${entry.reactFile.lines} vue:${entry.aggregateVueLines} ratio:${entry.ratio.toFixed(2)}`,
   )
 }
