@@ -1,6 +1,6 @@
 import { DeferredAnalytics } from "@/components/deferred-analytics"
 import { JsonLd } from "@/components/json-ld"
-import { Providers } from "@/components/providers"
+import { NextProviders } from "@/components/providers/next"
 import { app, META_THEME_COLORS } from "@/config/app"
 import "@/styles/app.css"
 import type { Metadata, Viewport } from "next"
@@ -170,10 +170,10 @@ export default function RootLayout({ children }: Readonly<Props>) {
         <meta name="theme-color" content={META_THEME_COLORS.light} />
       </head>
       <body className="min-h-svh font-sans antialiased">
-        <Providers>
+        <NextProviders>
           <Toast />
           <main>{children}</main>
-        </Providers>
+        </NextProviders>
         <Suspense>
           <AurelieAnalytics />
         </Suspense>

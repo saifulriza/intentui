@@ -25,6 +25,7 @@ export const IconBrandVite = (props: React.ComponentProps<"svg">) => (
   <svg
     className="size-5"
     data-slot="icon"
+    aria-hidden="true"
     {...props}
     viewBox="0 0 40 40"
     fill="none"
@@ -66,6 +67,21 @@ export const IconBrandVite = (props: React.ComponentProps<"svg">) => (
   </svg>
 )
 
+export const IconBrandVue = (props: React.ComponentProps<"svg">) => (
+  <svg
+    className="size-5"
+    data-slot="icon"
+    aria-hidden="true"
+    {...props}
+    viewBox="0 0 261.76 226.69"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M161.12 0 130.88 52.36 100.64 0H0l130.88 226.69L261.76 0Z" fill="#41B883" />
+    <path d="M161.12 0 130.88 52.36 100.64 0H52.33l78.55 136.06L209.43 0Z" fill="#34495E" />
+  </svg>
+)
+
 const frameworks = [
   {
     name: "Laravel",
@@ -84,6 +100,12 @@ const frameworks = [
     description: "Vite is a tool for building frontend applications in a fraction of the time.",
     logo: IconBrandVite,
     href: "/docs/getting-started/vite",
+  },
+  {
+    name: "Vue 3",
+    description: "Use Vue 3 with Intent through Vue-native Phase 16 components.",
+    logo: IconBrandVue,
+    href: "/docs/getting-started/vue",
   },
   {
     name: "TanStack Router",

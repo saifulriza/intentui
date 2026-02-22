@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { twJoin } from "tailwind-merge"
 import { Ads } from "@/components/ads"
 import { DocRefs } from "@/components/doc-refs"
+import { DocsFrameworkSwitch } from "@/components/docs-framework-switch"
 import { JsonLd } from "@/components/json-ld"
 import { mdxComponents } from "@/components/mdx-components"
 import { OpenIn } from "@/components/open-in"
@@ -155,6 +156,7 @@ export default async function Page(props: DocPageProps) {
             </div>
             <div className="flex items-center justify-between gap-x-2">
               <h1 className="mt-2 font-semibold text-xl tracking-tight sm:text-3xl">{doc.title}</h1>
+              {page.url.startsWith("/docs/components/") && <DocsFrameworkSwitch />}
             </div>
             {doc.description ? (
               <p className="mt-2.5 text-pretty text-base text-fg/60 leading-relaxed">

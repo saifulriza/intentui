@@ -10,6 +10,8 @@
     "build:llms": "node --import tsx src/scripts/generate-llms.ts",
     "build:search": "node --import tsx src/scripts/generate-search.ts",
     "build:icons": "node --import tsx src/scripts/generate-icon-metadata.ts",
+    "build:registry-generated": "node --import tsx src/scripts/build-registry-generated.ts",
+    "audit:vue-parity": "node --import tsx src/scripts/audit-vue-parity.ts",
     "prebuild": "npx fumadocs-mdx && npm run build:icons && npm run build:search && npm run build:llms && npm run registry:generate && node --import tsx src/scripts/extract-components-from-registry.ts && npm run build:stubs",
     "cuc": "node --import tsx src/scripts/check-use-client.ts",
     "cdc": "node --import tsx src/scripts/check-duplicated-classes.ts",
@@ -22,6 +24,7 @@
     "format:unsafe": "biome check --unsafe --write",
     "start": "next start",
     "preview": "npm run build && next start",
+    "pretypecheck": "npx fumadocs-mdx && npm run build:icons && npm run build:search && npm run build:registry-generated",
     "typecheck": "tsc --noEmit"
   },
   "lint-staged": {

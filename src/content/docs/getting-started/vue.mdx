@@ -1,0 +1,450 @@
+---
+title: "Vue 3"
+description: Use Intent UI in Vue 3 with native Vue components (Phase 19) without React bridge dependencies.
+---
+
+## Installation
+Create a Vue project with Vite:
+<InstallCommand command="npm create vite@latest"/>
+
+Install Tailwind CSS and Vue plugin:
+<InstallCommand command="npm install tailwindcss @tailwindcss/vite @vitejs/plugin-vue"/>
+
+## Configure Vite
+Update your `vite.config.ts`:
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [vue(), tailwindcss()],
+})
+```
+
+## Phase 19 components (Vue-native)
+Phase 19 continues functional parity work after file-level parity between `src/components/ui` and `src/vue/components/ui`, including richer chart container behavior (`config`, `data`, legend selection), card compound slots parity, and new sidebar/navbar/drawer/table compound Vue APIs.
+- `Button.vue`
+- `Badge.vue`
+- `Card.vue`
+- `CardHeader.vue`
+- `CardTitle.vue`
+- `CardDescription.vue`
+- `CardAction.vue`
+- `CardContent.vue`
+- `CardFooter.vue`
+- `Input.vue`
+- `InputGroup.vue`
+- `Checkbox.vue`
+- `CheckboxGroup.vue`
+- `Radio.vue`
+- `RadioGroup.vue`
+- `Textarea.vue`
+- `Separator.vue`
+- `Keyboard.vue`
+- `Loader.vue`
+- `Avatar.vue`
+- `Link.vue`
+- `Switch.vue`
+- `Text.vue`
+- `TextLink.vue`
+- `Strong.vue`
+- `Code.vue`
+- `Heading.vue`
+- `Container.vue`
+- `Note.vue`
+- `Skeleton.vue`
+- `ButtonGroup.vue`
+- `ButtonGroupText.vue`
+- `DescriptionList.vue`
+- `DescriptionTerm.vue`
+- `DescriptionDetails.vue`
+- `ProgressBar.vue`
+- `ProgressCircle.vue`
+- `Meter.vue`
+- `Toggle.vue`
+- `ToggleGroup.vue`
+- `ToggleGroupItem.vue`
+- `TextField.vue`
+- `Label.vue`
+- `Description.vue`
+- `Fieldset.vue`
+- `FieldGroup.vue`
+- `FieldError.vue`
+- `Legend.vue`
+- `Breadcrumbs.vue`
+- `BreadcrumbsItem.vue`
+- `Toolbar.vue`
+- `ToolbarGroup.vue`
+- `ToolbarItem.vue`
+- `ToolbarSeparator.vue`
+- `BarList.vue`
+- `Tracker.vue`
+- `Leaderboard.vue`
+- `LeaderboardHeader.vue`
+- `LeaderboardTitle.vue`
+- `LeaderboardAction.vue`
+- `LeaderboardContent.vue`
+- `LeaderboardItem.vue`
+- `LeaderboardStart.vue`
+- `LeaderboardEnd.vue`
+- `DropZone.vue`
+- `FileTrigger.vue`
+- `Field.vue`
+- `Carousel.vue`
+- `ScrollArea.vue`
+- `Table.vue`
+- `TableHeader.vue`
+- `TableBody.vue`
+- `TableRow.vue`
+- `TableColumn.vue`
+- `TableCell.vue`
+- `Toast.vue`
+- `Snippet.vue`
+- `ShowMore.vue`
+- `DisclosureGroup.vue`
+- `ColorSwatch.vue`
+- `ColorSwatchPicker.vue`
+- `ColorArea.vue`
+- `ColorSlider.vue`
+- `ColorThumb.vue`
+- `ColorWheel.vue`
+- `ColorPicker.vue`
+- `Chart.vue`
+- `AreaChart.vue`
+- `BarChart.vue`
+- `LineChart.vue`
+- `PieChart.vue`
+- `NavbarSection.vue`
+- `NavbarItem.vue`
+- `NavbarTrigger.vue`
+- `SidebarHeader.vue`
+- `SidebarContent.vue`
+- `SidebarFooter.vue`
+- `SidebarItem.vue`
+- `SidebarTrigger.vue`
+- `DrawerHeader.vue`
+- `DrawerTitle.vue`
+- `DrawerDescription.vue`
+- `DrawerBody.vue`
+- `DrawerFooter.vue`
+
+You can copy these from:
+`/src/vue/components/ui`
+
+## Use in Vue
+Use the components directly in `.vue` files with `v-model`:
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import Button from '@/components/ui/Button.vue'
+import Badge from '@/components/ui/Badge.vue'
+import Card from '@/components/ui/Card.vue'
+import CardHeader from '@/components/ui/CardHeader.vue'
+import CardContent from '@/components/ui/CardContent.vue'
+import CardFooter from '@/components/ui/CardFooter.vue'
+import Input from '@/components/ui/Input.vue'
+import Checkbox from '@/components/ui/Checkbox.vue'
+import CheckboxGroup from '@/components/ui/CheckboxGroup.vue'
+import Radio from '@/components/ui/Radio.vue'
+import RadioGroup from '@/components/ui/RadioGroup.vue'
+import Textarea from '@/components/ui/Textarea.vue'
+import Separator from '@/components/ui/Separator.vue'
+import Loader from '@/components/ui/Loader.vue'
+import Keyboard from '@/components/ui/Keyboard.vue'
+import Avatar from '@/components/ui/Avatar.vue'
+import Link from '@/components/ui/Link.vue'
+import Switch from '@/components/ui/Switch.vue'
+import Text from '@/components/ui/Text.vue'
+import TextLink from '@/components/ui/TextLink.vue'
+import Strong from '@/components/ui/Strong.vue'
+import Code from '@/components/ui/Code.vue'
+import Heading from '@/components/ui/Heading.vue'
+import Container from '@/components/ui/Container.vue'
+import Note from '@/components/ui/Note.vue'
+import Skeleton from '@/components/ui/Skeleton.vue'
+import ButtonGroup from '@/components/ui/ButtonGroup.vue'
+import ButtonGroupText from '@/components/ui/ButtonGroupText.vue'
+import DescriptionList from '@/components/ui/DescriptionList.vue'
+import DescriptionTerm from '@/components/ui/DescriptionTerm.vue'
+import DescriptionDetails from '@/components/ui/DescriptionDetails.vue'
+import ProgressBar from '@/components/ui/ProgressBar.vue'
+import ProgressCircle from '@/components/ui/ProgressCircle.vue'
+import Meter from '@/components/ui/Meter.vue'
+import Toggle from '@/components/ui/Toggle.vue'
+import ToggleGroup from '@/components/ui/ToggleGroup.vue'
+import ToggleGroupItem from '@/components/ui/ToggleGroupItem.vue'
+import TextField from '@/components/ui/TextField.vue'
+import Label from '@/components/ui/Label.vue'
+import Description from '@/components/ui/Description.vue'
+import Fieldset from '@/components/ui/Fieldset.vue'
+import FieldGroup from '@/components/ui/FieldGroup.vue'
+import FieldError from '@/components/ui/FieldError.vue'
+import Legend from '@/components/ui/Legend.vue'
+import Breadcrumbs from '@/components/ui/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/components/ui/BreadcrumbsItem.vue'
+import Toolbar from '@/components/ui/Toolbar.vue'
+import ToolbarGroup from '@/components/ui/ToolbarGroup.vue'
+import ToolbarItem from '@/components/ui/ToolbarItem.vue'
+import ToolbarSeparator from '@/components/ui/ToolbarSeparator.vue'
+import BarList from '@/components/ui/BarList.vue'
+import Tracker from '@/components/ui/Tracker.vue'
+import Leaderboard from '@/components/ui/Leaderboard.vue'
+import LeaderboardHeader from '@/components/ui/LeaderboardHeader.vue'
+import LeaderboardTitle from '@/components/ui/LeaderboardTitle.vue'
+import LeaderboardAction from '@/components/ui/LeaderboardAction.vue'
+import LeaderboardContent from '@/components/ui/LeaderboardContent.vue'
+import LeaderboardItem from '@/components/ui/LeaderboardItem.vue'
+import LeaderboardStart from '@/components/ui/LeaderboardStart.vue'
+import LeaderboardEnd from '@/components/ui/LeaderboardEnd.vue'
+import DropZone from '@/components/ui/DropZone.vue'
+import FileTrigger from '@/components/ui/FileTrigger.vue'
+import Field from '@/components/ui/Field.vue'
+
+const name = ref('')
+const channels = ref<string[]>(['email'])
+const plan = ref('starter')
+const isOn = ref(true)
+const formatting = ref('bold')
+const ranking = [
+  { name: 'Starter', value: 52 },
+  { name: 'Pro', value: 78 },
+  { name: 'Enterprise', value: 33 },
+]
+const trackerData = [
+  { key: 'd1', color: 'bg-success', tooltip: 'High activity' },
+  { key: 'd2', color: 'bg-warning', tooltip: 'Medium activity' },
+  { key: 'd3', color: 'bg-danger', tooltip: 'Low activity' },
+  { key: 'd4', tooltip: 'No data' },
+]
+</script>
+
+<template>
+  <Container constrained>
+    <Card>
+        <CardHeader title="Vue 3 Native" description="Phase 18 components" />
+    <CardContent>
+      <Heading :level="3">Profile</Heading>
+      <Text class="mt-1">Build UIs with <Strong>Vue-native</Strong> Intent components.</Text>
+      <Input v-model="name" placeholder="Your name" />
+      <div class="mt-4">
+        <Textarea v-model="name" placeholder="Short bio" />
+      </div>
+      <div class="mt-4 space-y-3">
+        <CheckboxGroup v-model="channels">
+          <Checkbox value="email" label="Email" />
+          <Checkbox value="sms" label="SMS" />
+        </CheckboxGroup>
+      </div>
+      <div class="mt-4 space-y-3">
+        <RadioGroup v-model="plan">
+          <Radio value="starter" label="Starter" />
+          <Radio value="pro" label="Pro" />
+        </RadioGroup>
+      </div>
+      <div class="mt-4">
+        <Badge intent="success">Selected plan: {{ plan }}</Badge>
+      </div>
+      <div class="mt-4 flex items-center gap-2">
+        <Keyboard>⌘K</Keyboard>
+        <Loader />
+      </div>
+      <div class="mt-4 flex items-center gap-3">
+        <Avatar initials="IN" alt="Intent UI" />
+        <Link href="https://intentui.com" target="_blank" rel="noreferrer">Visit docs</Link>
+      </div>
+      <div class="mt-4">
+        <Switch :model-value="true" label="Notifications" />
+      </div>
+      <div class="mt-4">
+        <ButtonGroup>
+          <Button intent="outline">Back</Button>
+          <Button intent="primary">Save</Button>
+        </ButtonGroup>
+      </div>
+      <div class="mt-3">
+        <ButtonGroupText>2 actions selected</ButtonGroupText>
+      </div>
+      <div class="mt-4">
+        <Note intent="info">Try <Code>&lt;TextLink /&gt;</Code> for inline links in copy.</Note>
+      </div>
+      <div class="mt-2">
+        <TextLink href="https://intentui.com/docs/getting-started/vue" target="_blank" rel="noreferrer">
+          Open Vue guide
+        </TextLink>
+      </div>
+      <div class="mt-4">
+        <Separator />
+      </div>
+      <div class="mt-4">
+        <DescriptionList>
+          <DescriptionTerm>Plan</DescriptionTerm>
+          <DescriptionDetails>{{ plan }}</DescriptionDetails>
+        </DescriptionList>
+      </div>
+      <div class="mt-4">
+        <Skeleton class="h-6 w-full" />
+      </div>
+      <div class="mt-4 space-y-3">
+        <ProgressBar :model-value="65" />
+        <div class="flex items-center gap-2">
+          <ProgressCircle :model-value="65" />
+          <Meter :model-value="65" />
+        </div>
+      </div>
+      <div class="mt-4">
+        <Toggle v-model="isOn">Standalone Toggle</Toggle>
+      </div>
+      <div class="mt-4">
+        <ToggleGroup v-model="formatting" selection-mode="single">
+          <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
+          <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+      <div class="mt-4">
+        <TextField>
+          <Label>Display Name</Label>
+          <Input v-model="name" placeholder="Type your display name" />
+          <Description>This name appears on your profile.</Description>
+          <FieldError v-if="name.length === 0">Display name is required.</FieldError>
+        </TextField>
+      </div>
+      <div class="mt-4">
+        <Fieldset>
+          <Legend>Preferences</Legend>
+          <FieldGroup>
+            <Switch :model-value="true" label="Email updates" />
+          </FieldGroup>
+        </Fieldset>
+      </div>
+      <div class="mt-4">
+        <Breadcrumbs>
+          <BreadcrumbsItem href="/docs">Docs</BreadcrumbsItem>
+          <BreadcrumbsItem href="/docs/getting-started">Getting Started</BreadcrumbsItem>
+          <BreadcrumbsItem current>Vue 3</BreadcrumbsItem>
+        </Breadcrumbs>
+      </div>
+      <div class="mt-4">
+        <Toolbar>
+          <ToolbarGroup>
+            <ToolbarItem :model-value="true">Bold</ToolbarItem>
+            <ToolbarItem>Italic</ToolbarItem>
+          </ToolbarGroup>
+          <ToolbarSeparator />
+          <ToolbarGroup>
+            <ToolbarItem intent="plain">Preview</ToolbarItem>
+          </ToolbarGroup>
+        </Toolbar>
+      </div>
+      <div class="mt-4">
+        <BarList :data="ranking" />
+      </div>
+      <div class="mt-4">
+        <Tracker :data="trackerData" />
+      </div>
+      <div class="mt-4">
+        <Leaderboard>
+          <LeaderboardHeader>
+            <LeaderboardTitle>Plan score</LeaderboardTitle>
+            <LeaderboardAction>Updated today</LeaderboardAction>
+          </LeaderboardHeader>
+          <LeaderboardContent>
+            <LeaderboardItem :model-value="78">
+              <template #default="{ value }">
+                <LeaderboardStart>Pro</LeaderboardStart>
+                <LeaderboardEnd>{{ value }}</LeaderboardEnd>
+              </template>
+            </LeaderboardItem>
+          </LeaderboardContent>
+        </Leaderboard>
+      </div>
+      <div class="mt-4">
+        <DropZone @files-drop="(files) => console.log(files)">
+          Drop files here
+        </DropZone>
+      </div>
+      <div class="mt-4">
+        <FileTrigger @change="(files) => console.log(files)">Upload file</FileTrigger>
+      </div>
+      <div class="mt-4">
+        <Field>
+          <Label>Company</Label>
+          <Input placeholder="Intent UI" />
+        </Field>
+      </div>
+    </CardContent>
+    <CardFooter>
+      <Button intent="primary">Continue</Button>
+    </CardFooter>
+  </Card>
+  </Container>
+</template>
+```
+
+## Notes
+- These Phase 19 components are Vue-native and do not depend on React, React DOM, or Veaury.
+- Run `npm run audit:vue-parity` to re-check file-level coverage and detect likely behavior/style/props gaps.
+
+## Migration progress
+- React UI files tracked: **87**
+- Vue-native file-level parity (kebab-case mapping): **87**
+- Remaining React UI files not yet migrated: **0**
+
+## Gap audit (behavior/style/props)
+- Current audit threshold: Vue files with less than **35%** of their React counterpart line count.
+- Potential high-gap components: **7**
+- Highest-priority candidates:
+  - `text` → `Text` (ratio `0.15`)
+  - `sidebar` → `Sidebar` (ratio `0.18`)
+  - `toolbar` → `Toolbar` (ratio `0.30`)
+  - `breadcrumbs` → `Breadcrumbs` (ratio `0.30`)
+  - `toggle-group` → `ToggleGroup` (ratio `0.31`)
+
+## Critical interactive batch status
+- Migrated from stubs to functional Vue implementations:
+  - `Dialog.vue`
+  - `Modal.vue`
+  - `Sheet.vue`
+  - `Drawer.vue`
+  - `Popover.vue`
+  - `Tooltip.vue`
+  - `Tabs.vue`
+  - `Menu.vue`
+  - `Dropdown.vue`
+  - `Select.vue`
+  - `ListBox.vue`
+  - `SearchField.vue`
+  - `CommandMenu.vue`
+  - `Calendar.vue`
+  - `DateField.vue`
+  - `DatePicker.vue`
+  - `RangeCalendar.vue`
+  - `DateRangePicker.vue`
+  - `TimeField.vue`
+  - `NumberField.vue`
+  - `ComboBox.vue`
+  - `MultipleSelect.vue`
+  - `Slider.vue`
+  - `TagField.vue`
+  - `ColorField.vue`
+  - `InputOtp.vue`
+  - `ChoiceBox.vue`
+  - `ContextMenu.vue`
+  - `TagGroup.vue`
+  - `GridList.vue`
+  - `Tree.vue`
+  - `Pagination.vue`
+  - `Navbar.vue`
+  - `Sidebar.vue`
+   - `ColorWheel.vue`
+   - `ColorPicker.vue`
+   - `Chart.vue`
+   - `AreaChart.vue`
+   - `BarChart.vue`
+   - `LineChart.vue`
+   - `PieChart.vue`
+   - `LeaderboardItem.vue` (action/value parity)
+
+## Other frameworks
+You might be interested in using Intent with other frameworks.
+<FrameworkGuides/>
