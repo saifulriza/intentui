@@ -1,23 +1,27 @@
 <script setup lang="ts">
-import { provide, toRef } from "vue"
+import { computed, provide, toRef } from "vue"
 
 const props = withDefaults(
   defineProps<{
     separator?: "chevron" | "slash" | boolean
+    ariaLabel?: string
   }>(),
   {
     separator: "chevron",
+    ariaLabel: "Breadcrumb",
   },
 )
 
 provide("intent-breadcrumbs", {
   separator: toRef(props, "separator"),
 })
+
+const listClass = computed(() => ["flex items-center gap-2"])
 </script>
 
 <template>
-  <nav aria-label="Breadcrumb">
-    <ol data-slot="breadcrumbs" class="flex items-center gap-2">
+  <nav data-slot="breadcrumbs-nav" :aria-label="ariaLabel">
+    <ol data-slot="breadcrumbs" :class="listClass">
       <slot />
     </ol>
   </nav>

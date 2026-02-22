@@ -11,6 +11,7 @@ const group = inject<{
   selectionMode: { value: "single" | "multiple" }
   orientation: { value: "horizontal" | "vertical" }
   size: { value: "xs" | "sm" | "md" | "lg" | "sq-xs" | "sq-sm" | "sq-md" | "sq-lg" }
+  isCircle: { value: boolean }
   toggleValue: (value: string) => void
 }>("intent-toggle-group")
 
@@ -42,6 +43,13 @@ const classes = computed(() =>
     isSelected.value
       ? "inset-ring-fg/20 bg-(--toggle-selected-bg) text-(--toggle-selected-fg)"
       : "text-(--toggle-fg) hover:bg-(--toggle-hover-bg) hover:text-(--toggle-hover-fg)",
+    group?.selectionMode.value === "multiple" && group?.orientation.value === "horizontal"
+      ? "not-first:-ms-px first:rounded-s-[calc(var(--toggle-group-radius)-var(--toggle-gutter))] last:rounded-e-[calc(var(--toggle-group-radius)-var(--toggle-gutter))]"
+      : "",
+    group?.selectionMode.value === "multiple" && group?.orientation.value === "vertical"
+      ? "not-first:-mt-px first:rounded-t-[calc(var(--toggle-group-radius)-var(--toggle-gutter))] last:rounded-b-[calc(var(--toggle-group-radius)-var(--toggle-gutter))]"
+      : "",
+    group?.isCircle.value ? "rounded-full" : "",
     props.disabled ? "opacity-50 forced-colors:text-[GrayText]" : "",
   ].join(" "),
 )

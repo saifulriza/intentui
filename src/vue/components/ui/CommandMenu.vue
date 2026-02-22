@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { computed, onMounted, onUnmounted, ref, watch } from "vue"
 import ListBox from "./ListBox.vue"
 import SearchField from "./SearchField.vue"
 
@@ -16,12 +16,18 @@ const props = withDefaults(
     items?: CommandMenuItem[]
     placeholder?: string
     title?: string
+    shortcut?: string
+    isPending?: boolean
+    escapeButton?: boolean
   }>(),
   {
     modelValue: false,
     items: () => [],
     placeholder: "Search...",
     title: "Command Menu",
+    shortcut: "",
+    isPending: false,
+    escapeButton: true,
   },
 )
 
@@ -51,6 +57,29 @@ const onSelect = (value: string | string[]) => {
   emit("select", item)
   close()
 }
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (props.shortcut && event.key.toLowerCase() === props.shortcut.toLowerCase() && (event.metaKey || event.ctrlKey)) {
+    event.preventDefault()
+    emit("update:modelValue", true)
+    return
+  }
+
+  if (event.key === "Escape" && props.modelValue) {
+    event.preventDefault()
+    close()
+  }
+}
+
+onMounted(() => document.addEventListener("keydown", handleKeydown))
+onUnmounted(() => document.removeEventListener("keydown", handleKeydown))
+
+watch(
+  () => props.modelValue,
+  (isOpen) => {
+    if (isOpen) query.value = ""
+  },
+)
 </script>
 
 <template>
@@ -82,7 +111,16 @@ const onSelect = (value: string | string[]) => {
             No results found.
           </div>
           <div class="border-t px-2 py-1.5 text-muted-fg text-sm">
-            {{ title }}
+            <span v-if="isPending">Searching…</span>
+            <span v-else>{{ title }}</span>
+            <button
+              v-if="escapeButton"
+              type="button"
+              class="float-right hidden cursor-default rounded border px-1.5 py-0.5 text-current/90 hover:bg-muted lg:inline lg:text-xs"
+              @click="close"
+            >
+              Esc
+            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, toRef } from "vue"
+import { computed, provide, toRef } from "vue"
 
 const props = withDefaults(
   defineProps<{
@@ -37,19 +37,27 @@ provide("intent-toggle-group", {
   selectionMode: toRef(props, "selectionMode"),
   orientation: toRef(props, "orientation"),
   size: toRef(props, "size"),
+  isCircle: toRef(props, "isCircle"),
   toggleValue,
 })
+
+const classes = computed(() => [
+  "[--toggle-group-radius:var(--radius-lg)] [--toggle-gutter:--spacing(0.5)] [--toggle-fg:var(--color-fg)] [--toggle-selected-bg:var(--color-primary)] [--toggle-selected-fg:var(--color-primary-fg)] [--toggle-focused-bg:var(--color-secondary)] [--toggle-focused-fg:var(--color-secondary-fg)] [--toggle-hover-bg:var(--toggle-focused-bg)] [--toggle-hover-fg:var(--toggle-focused-fg)] inset-ring inset-ring-border inline-flex overflow-hidden p-(--toggle-gutter)",
+  orientation === "horizontal" ? "flex-row" : "flex-col",
+  selectionMode === "single" ? "gap-(--toggle-gutter)" : "gap-0",
+  isCircle ? "rounded-full" : "rounded-(--toggle-group-radius)",
+  selectionMode === "single" && isCircle ? "*:data-[slot=toggle-group-item]:rounded-full" : "",
+  selectionMode === "multiple" && isCircle
+    ? "*:data-[slot=toggle-group-item]:first:rounded-s-full *:data-[slot=toggle-group-item]:last:rounded-e-full"
+    : "",
+])
 </script>
 
 <template>
   <div
     data-slot="control"
-    class="[--toggle-group-radius:var(--radius-lg)] [--toggle-gutter:--spacing(0.5)] [--toggle-fg:var(--color-fg)] [--toggle-selected-bg:var(--color-primary)] [--toggle-selected-fg:var(--color-primary-fg)] [--toggle-focused-bg:var(--color-secondary)] [--toggle-focused-fg:var(--color-secondary-fg)] [--toggle-hover-bg:var(--toggle-focused-bg)] [--toggle-hover-fg:var(--toggle-focused-fg)] inset-ring inset-ring-border inline-flex overflow-hidden p-(--toggle-gutter)"
-    :class="[
-      orientation === 'horizontal' ? 'flex-row' : 'flex-col',
-      selectionMode === 'single' ? 'gap-(--toggle-gutter)' : 'gap-0',
-      isCircle ? 'rounded-full' : 'rounded-(--toggle-group-radius)',
-    ]"
+    :data-orientation="orientation"
+    :class="classes"
   >
     <slot />
   </div>

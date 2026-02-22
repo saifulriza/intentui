@@ -1,7 +1,13 @@
 <script setup lang="ts">
-defineProps<{
+import { provide, toRef } from "vue"
+
+const props = defineProps<{
   disabled?: boolean
 }>()
+
+provide("intent-toolbar-group", {
+  disabled: toRef(props, "disabled"),
+})
 </script>
 
 <template>

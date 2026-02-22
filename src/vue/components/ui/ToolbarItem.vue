@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue"
+import { computed, inject } from "vue"
 import Toggle from "./Toggle.vue"
 
 const props = withDefaults(
@@ -24,17 +24,19 @@ const emit = defineEmits<{
 }>()
 
 const toolbar = inject<{ isCircle: { value: boolean } } | null>("intent-toolbar", null)
+const toolbarGroup = inject<{ disabled?: { value?: boolean } } | null>("intent-toolbar-group", null)
+const isDisabled = computed(() => props.disabled || !!toolbarGroup?.disabled?.value)
 </script>
 
 <template>
   <Toggle
     data-slot="toolbar-item"
     :model-value="modelValue"
-    :disabled="disabled"
+    :disabled="isDisabled"
     :size="size"
     :intent="intent"
-    :is-circle="isCircle || toolbar?.isCircle?.value"
-    @update:model-value="emit('update:modelValue', $event)"
+      :is-circle="isCircle || toolbar?.isCircle?.value"
+      @update:model-value="emit('update:modelValue', $event)"
   >
     <slot />
   </Toggle>
