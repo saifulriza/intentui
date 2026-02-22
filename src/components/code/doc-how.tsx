@@ -6,6 +6,7 @@ import { twJoin, twMerge } from "tailwind-merge"
 import generated from "@/../__registry__/generated"
 import { CodeHighlighter } from "@/components/code/code-highlighter"
 import { PullRegistry } from "@/components/code/pull-registry"
+import { DocsFrameworkSwitch } from "@/components/docs-framework-switch"
 import { Loader } from "@/components/ui/loader"
 import { useDocFramework } from "@/hooks/use-doc-framework"
 import { createFetchRegistryFile } from "@/lib/fetch-registry"
@@ -132,6 +133,7 @@ export const DocHow = ({
               blockDemo={blockDemo}
             />
           )}
+          <DocsFrameworkSwitch />
         </Group>
       </Toolbar>
 
