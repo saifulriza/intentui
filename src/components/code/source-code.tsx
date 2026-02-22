@@ -5,7 +5,7 @@ import { twJoin } from "tailwind-merge"
 import { CodeHighlighter } from "@/components/code/code-highlighter"
 import { CopyButton } from "@/components/code/copy-button"
 import { BrandReactjsIcon } from "@/components/icons/brand-reactjs-icon"
-import { createFetchRegistryFile } from "@/lib/fetch-registry"
+import { useDocFramework } from "@/hooks/use-doc-framework"
 
 type SourceCodeProps = {
   toShow: string
@@ -14,18 +14,33 @@ type SourceCodeProps = {
   ext?: string
 }
 
-const fetchRegistryFile = createFetchRegistryFile("/r")
-
 export const SourceCode = ({ toShow, ...props }: SourceCodeProps) => {
+  const { framework } = useDocFramework()
   const [rawSourceCode, setRawSourceCode] = useState<string | null>(null)
+  const [loadingError, setLoadingError] = useState<string | null>(null)
   const processedSourceCode = useMemo(() => {
     if (!rawSourceCode) return null
 
     return rawSourceCode
   }, [rawSourceCode])
   useEffect(() => {
-    fetchRegistryFile(`${toShow}`).then(setRawSourceCode)
-  }, [toShow])
+    setLoadingError(null)
+    fetch(`/api/source/${framework}/${toShow}`)
+      .then(async (response) => {
+        if (!response.ok) {
+          setLoadingError("Unable to load source code.")
+          return null
+        }
+        const payload = await response.json()
+        return payload.content as string
+      })
+      .then(setRawSourceCode)
+      .catch((error) => {
+        console.error("Failed to load source code:", error)
+        setLoadingError("Unable to load source code.")
+        setRawSourceCode(null)
+      })
+  }, [framework, toShow])
 
   if (processedSourceCode) {
     return (
@@ -44,8 +59,12 @@ export const SourceCode = ({ toShow, ...props }: SourceCodeProps) => {
           {props.title && <figcaption data-rehype-pretty-code-title="">{props.title}</figcaption>}
           <div className="flex items-center justify-between border-b">
             <div className="flex cursor-default items-center gap-x-1 px-3 py-2 font-medium text-sm/6">
-              <BrandReactjsIcon className="size-4 text-sky-500" />
-              {toShow}.tsx
+              {framework === "react" ? (
+                <BrandReactjsIcon className="size-4 text-sky-500" />
+              ) : (
+                <span className="font-semibold text-emerald-500 text-xs">V</span>
+              )}
+              {framework === "react" ? `${toShow}.tsx` : `${toShow}.vue`}
             </div>
             <CopyButton className="grid size-10 place-content-center" text={processedSourceCode} />
           </div>
@@ -59,5 +78,9 @@ export const SourceCode = ({ toShow, ...props }: SourceCodeProps) => {
         </div>
       </section>
     )
+  }
+
+  if (loadingError) {
+    return <p className="my-4 text-danger text-sm">{loadingError}</p>
   }
 }

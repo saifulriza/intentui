@@ -7,6 +7,7 @@ import generated from "@/../__registry__/generated"
 import { CodeHighlighter } from "@/components/code/code-highlighter"
 import { PullRegistry } from "@/components/code/pull-registry"
 import { Loader } from "@/components/ui/loader"
+import { useDocFramework } from "@/hooks/use-doc-framework"
 import { createFetchRegistryFile } from "@/lib/fetch-registry"
 import type { RegistryItem } from "@/types"
 
@@ -36,8 +37,10 @@ export const DocHow = ({
   src,
   ...props
 }: HowProps) => {
+  const { framework } = useDocFramework()
   const [currentTab, setCurrentTab] = useState<"tab_preview" | "tab_code">("tab_preview")
   const [rawSourceCode, setRawSourceCode] = useState<string | null>(null)
+  const [loadingError, setLoadingError] = useState<string | null>(null)
   /*
    * Prepend the `demo/` prefix to the provided `toUse` prop
    * to construct the registry key dynamically.
@@ -51,6 +54,7 @@ export const DocHow = ({
   const Component = registry[registryKey]?.component
 
   const blockDemo = toUse.split("/").pop() ?? ""
+  const componentSlug = toUse.split("/")[1] ?? blockDemo.replace(/-demo$/, "")
 
   const processedSourceCode = useMemo(() => {
     if (!rawSourceCode) return null
@@ -65,9 +69,29 @@ export const DocHow = ({
   }, [rawSourceCode])
 
   useEffect(() => {
-    const name = `${toUse?.split("/").pop()}`
-    fetchRegistryFile(name).then(setRawSourceCode)
-  }, [toUse])
+    setLoadingError(null)
+    if (framework === "react") {
+      const name = `${toUse?.split("/").pop()}`
+      fetchRegistryFile(name).then(setRawSourceCode)
+      return
+    }
+
+    fetch(`/api/source/vue/${componentSlug}`)
+      .then(async (response) => {
+        if (!response.ok) {
+          setLoadingError("Unable to load Vue source code.")
+          return null
+        }
+        const payload = await response.json()
+        return payload.content as string
+      })
+      .then(setRawSourceCode)
+      .catch((error) => {
+        console.error("Failed to load Vue source code:", error)
+        setLoadingError("Unable to load Vue source code.")
+        setRawSourceCode(null)
+      })
+  }, [componentSlug, framework, toUse])
 
   if (!Component) {
     /*
@@ -101,11 +125,13 @@ export const DocHow = ({
           </ToggleButton>
         </Group>
         <Group>
-          <PullRegistry
-            readMore={props.readMore}
-            processedSourceCode={processedSourceCode}
-            blockDemo={blockDemo}
-          />
+          {framework === "react" && (
+            <PullRegistry
+              readMore={props.readMore}
+              processedSourceCode={processedSourceCode}
+              blockDemo={blockDemo}
+            />
+          )}
         </Group>
       </Toolbar>
 
@@ -153,7 +179,7 @@ export const DocHow = ({
                 />
               </div>
             ) : (
-              <p>Loading source code...</p>
+              <p>{loadingError ?? "Loading source code..."}</p>
             )}
           </div>
         )}
